@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <!-- <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />-->
+
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/element-ui.css">
+
+    <script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=ti0HQZaexBF69AHCmHmPkK04zEFgG3XI"></script>
+    <script src="js/vue.min.js"></script>
+    <script src="js/element-ui.js" ></script>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/indexMap.js"></script>
+    <title>MapDemo</title>
+</head>
+
+<body>
+<div id="map">
+</div>
+<div id="app">
+    <div id="menu">
+        <ul >
+            <li @click="pointClick" :class=action=='point'?'checked':'' show-hov ><i class="icon_point"></i>位置点</li>
+            <li @click="lineClick"  :class=action=='line'?'checked':''  show-hov>路线</li>
+            <li show-hov @click="save" >保存路线</li>
+            <li show-hov @click="lineEditClick" >编辑路线</li>
+            <li show-hov @click="lineDelClick" >删除路线</li>
+        </ul>
+    </div>
+
+    <el-dialog
+            title="路线"
+            :visible.sync="dialogVisible"
+            width="30%"
+            :before-close="handleClose">
+        <span> {{lineInfo}}</span>
+        <span slot="footer" class="dialog-footer">
+    <el-button @click="dialogVisible = false">取 消</el-button>
+    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+  </span>
+    </el-dialog>
+
+    <div id="pointList">
+        <span style="padding-left: 20px;font-size: 20px;display:inline-block;height: 30px; line-height:30px;vertical-align: middle">位置点列表</span>
+        <ul class="points">
+            <li v-for="(item,i) in points" @click="toCenter(i)" >{{item.name}}  <span class="point_posi">{{item.point.lng}},{{item.point.lat}}</span></li>
+            <li v-for="(item,i) in points" @click="toCenter(i)" >{{item.name}}  <span class="point_posi">{{item.point.lng}},{{item.point.lat}}</span></li>
+        </ul>
+    </div>
+</div>
+
+
+</body>
+
+</html>
